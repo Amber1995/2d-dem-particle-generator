@@ -8,11 +8,13 @@ public:
 
   double x,y,z;
   doule radius;
-  Generate_Paritle()=Particle(x,y,z,radius);
+  Paritle();
+  Particle(double,double,double,double);
   
 }
 
-  Generate_Particle::Particle(double x1,double y1,double z1,double r)
+  Particle::Particle(){}
+  Particle::Particle(double x1,double y1,double z1,double r)
   {
     x=x1;
     y=y1;
