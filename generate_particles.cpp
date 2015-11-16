@@ -7,13 +7,11 @@ class Particle{
 public:
 
   double x,y,z;
-  doule radius;
-  Paritle();
+  double radius;
   Particle(double,double,double,double);
   
 }
 
-  Particle::Particle(){}
   Particle::Particle(double x1,double y1,double z1,double r)
   {
     x=x1;
