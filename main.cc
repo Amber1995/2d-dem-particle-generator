@@ -10,4 +10,6 @@ int main() {
 
   std::array<double, Dim> coordiantes = {0., 0., 0.};
   auto grain = std::make_shared<Particle>(id, coordiantes, radius);
+
 }
+
