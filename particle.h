@@ -10,7 +10,7 @@ template <unsigned Tdim>
 class Particle {
 
  public:
-  //! Arguments passed by reference;
+  //! reference to an object and constructor initialization
   Particle(const unsigned& id, const std::array<double, Tdim>& coordinates,
            const double& radius)
       : id_{id}, radius_{radius} {
