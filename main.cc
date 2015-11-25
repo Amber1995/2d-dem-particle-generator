@@ -1,23 +1,22 @@
-#include <iostream>
 #include <memory>
 
-#include "particle.h"
 #include "particle_generator.h"
 
 int main() {
-
-  //! initialize the variables
+  
   const unsigned Dim = 3;
-  unsigned id = 0;
-  double radius = 1.;
-  unsigned total_numbers = 100;
-  double min_radius = 1.;
+  std::array<double,Dim> coordinates={0.,0.,0.}; 
+  const double radius=1.;
+  unsigned num_particles = 100;
+  double min_radius = 0.1;
   double max_radius = 10.;
 
-  std::array<double, Dim> coordiantes = {0., 0.,0.};
+    
+  //! create a ParticleGenerator object called grainGenerator
+  
+  auto grain_generator = std::make_shared <ParticleGenerator<Dim>>(num_particles,min_radius,max_radius);
 
-    auto grain = std::make_shared <Particle<Dim>>(id, coordiantes, radius);
+  grain_generator->generator();
 
-  //(*grain).info();
-  grain->info();
+
 }
