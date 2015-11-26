@@ -38,7 +38,7 @@ class Particle {
 
   void radius(const double& radius) { radius_ = radius; }
     
-  //! print the variables in the file particle.tcc
+  //! print the variables
   void info();
 
  private:

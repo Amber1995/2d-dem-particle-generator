@@ -17,6 +17,8 @@ ParticleGenerator(const unsigned& num_particles,const double& min_radius, const 
   :num_particles_{num_particles},min_radius_{min_radius}, max_radius_{max_radius}{}
 
   void generator();
+
+  void info();
     
 private:
   unsigned num_particles_;
