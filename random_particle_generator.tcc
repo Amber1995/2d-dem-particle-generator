@@ -6,7 +6,7 @@
 
 //! to generate particles
 template <unsigned Tdim>
-void ParticleGenerator <Tdim>::generator(){
+void RandomParticleGenerator<Tdim>::generator(){
   
   std::srand (std::time(nullptr));
 
@@ -16,7 +16,4 @@ void ParticleGenerator <Tdim>::generator(){
       vec_particles_ptr_.push_back(grain);
   }
   
-  for (const auto& grain:vec_particles_ptr_){
-    grain->info();
-  }
 }

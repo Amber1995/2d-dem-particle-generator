@@ -16,17 +16,18 @@ public:
 ParticleGenerator(const unsigned& num_particles,const double& min_radius, const double& max_radius)
   :num_particles_{num_particles},min_radius_{min_radius}, max_radius_{max_radius}{}
 
-  void generator();
+  virtual ~ParticleGenerator(){vec_particles_ptr_.clear();}
+  
+  virtual void generator() = 0;
 
-  void info();
-    
-private:
+  void particles_info();
+  
+protected:
   unsigned num_particles_;
   double min_radius_;
   double max_radius_;
   std::vector<std::shared_ptr<Particle<Tdim>>> vec_particles_ptr_;
-  
 };
 
-#include "generator.tcc"
+#include "particle_generator.tcc"
 #endif  //DEM_PARTICLE_GENERATOR_H

@@ -13,16 +13,19 @@ class RandomParticleGenerator : public ParticleGenerator<Tdim> {
 public:
 
   RandomParticleGenerator(const unsigned& num_particles,const double& min_radius, const double& max_radius)
-    : ParticleGenerator( num_particles, min_radius,  max_radius){};
-  // void generator();
+    : ParticleGenerator<Tdim>(num_particles,min_radius, max_radius){}
 
-  private:
-  unsigned num_particles_;
-  double min_radius_;
-  double max_radius_;
-   std::vector<std::shared_ptr<Particle<Tdim>>> vec_particles_ptr_;
+  ~RandomParticleGenerator(){};
   
+  void generator();
+
+protected:
+  
+  using ParticleGenerator<Tdim>::num_particles_;
+  using ParticleGenerator<Tdim>::min_radius_;
+  using ParticleGenerator<Tdim>::max_radius_;
+  using ParticleGenerator<Tdim>::vec_particles_ptr_;
 };
 
-//#include "generator.tcc"
+#include "random_particle_generator.tcc"
 #endif
