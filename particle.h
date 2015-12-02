@@ -38,7 +38,7 @@ class Particle {
 
   void radius(const double& radius) { radius_ = radius; }
     
-  //! print one particle
+  //! print one particle to the terminal
   void info();
 
  private:

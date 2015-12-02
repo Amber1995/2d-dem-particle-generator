@@ -1,8 +1,8 @@
-#include <cstdlib>  //!srand, rand
-#include <ctime>  //!time
-
 #include <memory>
 #include <vector>
+
+#include <cstdlib>  //!srand, rand
+#include <ctime>  //!time
 
 //! to generate particles
 template <unsigned Tdim>
@@ -15,5 +15,4 @@ void RandomParticleGenerator<Tdim>::generator(){
     auto grain = std::make_shared <Particle<Tdim>>(id, radius);
       vec_particles_ptr_.push_back(grain);
   }
-  
 }

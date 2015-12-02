@@ -1,4 +1,5 @@
-//! print the particle information
+//! print the particle information to the terminal
+
 template <unsigned Tdim>
 void Particle <Tdim>::info() {
 
