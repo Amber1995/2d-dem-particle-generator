@@ -1,15 +1,13 @@
-//! print the particle information to the terminal
+//! print a particle information to the csv file
 
 template <unsigned Tdim>
-void Particle <Tdim>::info() {
+void Particle <Tdim>::info(std::ofstream& outfile) {
 
-  std::cout << "Particle ID " << id_ << std::endl;
+//! outfile << "Particle ID,Radius,\n";
 
-  std::cout<<"Coordinates ";
-  
-  for(const auto &coordinate:coordinates_)
-     std::cout<<coordinate<<' ';
-  std::cout << std::endl;
-  
-  std::cout << "Particle radius " << radius_ << std::endl;
+  outfile<<id_<<","<<radius_<<"\n";
+
+// for(const auto& coordinate:coordinates_)
+//    std::cout<<coordinate<<"";
+//    std::cout<<std::endl;
 }

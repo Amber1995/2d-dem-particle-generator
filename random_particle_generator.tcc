@@ -4,7 +4,8 @@
 #include <cstdlib>  //!srand, rand
 #include <ctime>  //!time
 
-//! to generate particles
+//! implementation of function generator()
+//! to generate all the particles
 template <unsigned Tdim>
 void RandomParticleGenerator<Tdim>::generator(){
   
@@ -12,7 +13,9 @@ void RandomParticleGenerator<Tdim>::generator(){
 
   for (unsigned id=0; id<num_particles_; ++id){
     double radius=static_cast<double>(std::rand())/(static_cast<double>(RAND_MAX))*(max_radius_ - min_radius_)+min_radius_;
+
     auto grain = std::make_shared <Particle<Tdim>>(id, radius);
-      vec_particles_ptr_.push_back(grain);
+
+    vec_particles_ptr_.push_back(grain);
   }
 }

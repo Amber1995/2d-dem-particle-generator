@@ -1,25 +1,14 @@
 //! this function is for reading particle generator information
 
 #include <fstream>
-#include <iostream>
 #include <sstream>
 #include <string>
 
-void read_generator(const int& argc, char** argv, unsigned& num_particles,double& max_radius ,double& min_radius){
-
-  std::string inputfile, outputfile;
+void read_generator(std::string& inputfile, unsigned& num_particles,double& max_radius ,double& min_radius){
+  
   std::string line;
   
-  if (argc == 3){
-    inputfile = argv[1];
-    outputfile = argv[2];
-  } else {
-    std::cerr<<"Incorret number of arguments."<<std::endl;
-    std::exit(EXIT_FAILURE);
-  }
-
   std::ifstream infile(inputfile);
-  std::ofstream outfile(outputfile);
 
 //! read the generator information
    if(infile.good())
@@ -37,7 +26,7 @@ void read_generator(const int& argc, char** argv, unsigned& num_particles,double
               std::getline(infile, line);
               std::istringstream istream(line);
               istream >> max_radius;
-              outfile << num_particles;
+              //outfile << num_particles;
           }
           else if (line.find("MIN_RADIUS")!=std::string::npos){
              std::getline(infile, line);

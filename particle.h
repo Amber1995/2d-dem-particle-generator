@@ -2,7 +2,7 @@
 #define DEM_PARTICLE_H_
 
 #include <array>
-#include <iostream>
+#include <fstream>
 #include <limits>
 
 //! brief base class containder for a single DEM particle
@@ -39,14 +39,13 @@ class Particle {
   void radius(const double& radius) { radius_ = radius; }
     
   //! print one particle to the terminal
-  void info();
+  void info(std::ofstream& outfile);
 
  private:
   unsigned id_;
   std::array<double, Tdim> coordinates_;
   double radius_;
-
-
+  
 };
 
 #include "particle.tcc"

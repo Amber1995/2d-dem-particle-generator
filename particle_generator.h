@@ -6,21 +6,19 @@
 
 #include "particle.h"
 
-//! \brief base class container for generating particles with certain numbers
+//! base class
 template <unsigned Tdim>
-class ParticleGenerator
-{
-public:
+class ParticleGenerator{
 
-  //!
-ParticleGenerator(const unsigned& num_particles,const double& min_radius, const double& max_radius)
-  :num_particles_{num_particles},min_radius_{min_radius}, max_radius_{max_radius}{}
+public:
+  ParticleGenerator(const unsigned& num_particles,const double& min_radius, const double& max_radius)
+  : num_particles_{num_particles},min_radius_{min_radius}, max_radius_{max_radius}{}
 
   virtual ~ParticleGenerator(){vec_particles_ptr_.clear();}
   
   virtual void generator() = 0;
 
-  void particles_info();
+  void particles_info(std::string& outputfile);
   
 protected:
   unsigned num_particles_;
