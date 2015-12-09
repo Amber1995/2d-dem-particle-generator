@@ -4,8 +4,8 @@
 #include <cstdlib>  //!srand, rand
 #include <ctime>  //!time
 
-//! implementation of function generator()
-//! to generate all the particles
+//! implementation of function random_generator()
+//! to generate all the particles with random PSD
 template <unsigned Tdim>
 void RandomParticleGenerator<Tdim>::generator(){
   

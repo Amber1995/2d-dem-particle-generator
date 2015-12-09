@@ -3,8 +3,9 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <iostream>
 
-void read_generator(std::string& inputfile, unsigned& num_particles,double& max_radius ,double& min_radius){
+void read_generator(std::string& inputfile, unsigned& num_particles,double& min_radius, double& max_radius, unsigned& min_class_particles, unsigned& num_intervals,double& alpha, double& beta){
   
   std::string line;
   
@@ -16,24 +17,48 @@ void read_generator(std::string& inputfile, unsigned& num_particles,double& max_
     while (std::getline(infile, line)) {
       // std::cout<<__FILE__ << __LINE__ <<"   "<<line<<std::endl;
       if(line!=""){    //! skip blank line
-
         if (line.find("*NUM_PARTICLES")!=std::string::npos){
               std::getline(infile, line);
               std::istringstream istream(line);
               istream >> num_particles;
+              // std::cout<< num_particles;
               }
         else if (line.find("*MAX_RADIUS")!=std::string::npos){
               std::getline(infile, line);
               std::istringstream istream(line);
               istream >> max_radius;
-              //outfile << num_particles;
-          }
-          else if (line.find("MIN_RADIUS")!=std::string::npos){
+              //   std::cout<<max_radius;
+              }
+        else if (line.find("MIN_RADIUS")!=std::string::npos){
              std::getline(infile, line);
              std::istringstream istream(line);
              istream >> min_radius;
-          }
-          else if (line.find("*END")){
+             //   std::cout<<min_radius;
+             }
+        else if (line.find("MIN_CLASS_PARTICLES")!=std::string::npos){
+             std::getline(infile, line);
+             std::istringstream istream(line);
+             istream >> min_class_particles;
+             //   std::cout<<min_class_particles;
+             }
+        else if(line.find("*NUM_INTERVALS")!=std::string::npos){
+             std::getline(infile, line);
+             std::istringstream istream(line);
+             istream >> num_intervals;
+             //    std::cout<<num_intervals;
+             }
+        else if(line.find("ALPHA")!=std::string::npos){
+             std::getline(infile, line);
+             std::istringstream istream(line);
+             istream >> alpha;
+           
+             }
+        else if(line.find("BETA")!=std::string::npos){
+             std::getline(infile, line);
+             std::istringstream istream(line);
+             istream >> beta;
+             }
+        else if (line.find("*END")){
             break;}
         }
      }

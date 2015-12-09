@@ -7,6 +7,8 @@
 #include "particle.h"
 #include "particle_generator.h"
 
+//! derived class
+
 template <unsigned Tdim>
 class RandomParticleGenerator : public ParticleGenerator<Tdim> {
   
