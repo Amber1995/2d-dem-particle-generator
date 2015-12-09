@@ -5,7 +5,7 @@
 #include <string>
 #include <iostream>
 
-void read_generator(std::string& inputfile, unsigned& num_particles,double& min_radius, double& max_radius, unsigned& min_class_particles, unsigned& num_intervals,double& alpha, double& beta){
+void read_generator(std::string& inputfile, unsigned& num_particles,double& min_radius, double& max_radius,double& alpha, double& beta){
   
   std::string line;
   
@@ -34,18 +34,6 @@ void read_generator(std::string& inputfile, unsigned& num_particles,double& min_
              std::istringstream istream(line);
              istream >> min_radius;
              //   std::cout<<min_radius;
-             }
-        else if (line.find("MIN_CLASS_PARTICLES")!=std::string::npos){
-             std::getline(infile, line);
-             std::istringstream istream(line);
-             istream >> min_class_particles;
-             //   std::cout<<min_class_particles;
-             }
-        else if(line.find("*NUM_INTERVALS")!=std::string::npos){
-             std::getline(infile, line);
-             std::istringstream istream(line);
-             istream >> num_intervals;
-             //    std::cout<<num_intervals;
              }
         else if(line.find("ALPHA")!=std::string::npos){
              std::getline(infile, line);
