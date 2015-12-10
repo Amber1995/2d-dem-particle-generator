@@ -4,8 +4,7 @@
 #include <sstream>
 #include <string>
 #include <iostream>
-
-void read_generator(std::string& inputfile, unsigned& num_particles,double& min_radius, double& max_radius,double& alpha, double& beta){
+void read_generator(std::string& inputfile, unsigned& num_particles,double& min_radius, double& max_radius,unsigned& num_particles_class, unsigned& num_classes,double& alpha, double& beta){
   
   std::string line;
   
@@ -21,27 +20,35 @@ void read_generator(std::string& inputfile, unsigned& num_particles,double& min_
               std::getline(infile, line);
               std::istringstream istream(line);
               istream >> num_particles;
-              // std::cout<< num_particles;
               }
         else if (line.find("*MAX_RADIUS")!=std::string::npos){
               std::getline(infile, line);
               std::istringstream istream(line);
               istream >> max_radius;
-              //   std::cout<<max_radius;
               }
-        else if (line.find("MIN_RADIUS")!=std::string::npos){
+        else if (line.find("*MIN_RADIUS")!=std::string::npos){
              std::getline(infile, line);
              std::istringstream istream(line);
              istream >> min_radius;
-             //   std::cout<<min_radius;
              }
-        else if(line.find("ALPHA")!=std::string::npos){
+                else if (line.find("*MIN_PARTICLE")!=std::string::npos){
+             std::getline(infile, line);
+             std::istringstream istream(line);
+             istream >> num_particles_class;
+             }
+
+        else if (line.find("*NUM_CLASSES")!=std::string::npos){
+             std::getline(infile, line);
+             std::istringstream istream(line);
+             istream >> num_classes;
+             }
+        else if(line.find("*ALPHA")!=std::string::npos){
              std::getline(infile, line);
              std::istringstream istream(line);
              istream >> alpha;
            
              }
-        else if(line.find("BETA")!=std::string::npos){
+        else if(line.find("*BETA")!=std::string::npos){
              std::getline(infile, line);
              std::istringstream istream(line);
              istream >> beta;
@@ -56,7 +63,6 @@ void read_generator(std::string& inputfile, unsigned& num_particles,double& min_
 
    //! make sure the max_radius is always larger than the min_radius
   if (min_radius > max_radius) std::swap(min_radius, max_radius);
-
   
 }
   

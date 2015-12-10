@@ -13,8 +13,8 @@ class BetaParticleGenerator : public ParticleGenerator<Tdim>{
 
 public:
 
-BetaParticleGenerator(const unsigned& num_particles, const double& min_radius, const double& max_radius, double& alpha,const double& beta)
-  :ParticleGenerator<Tdim>(num_particles, min_radius,max_radius),alpha_{alpha},beta_{beta}{}
+BetaParticleGenerator(const unsigned& num_particles, const double& min_radius, const double& max_radius, const unsigned& num_particles_class, const unsigned& num_classes, double& alpha,const double& beta)
+  :ParticleGenerator<Tdim>(num_particles, min_radius,max_radius),num_particles_class_{num_particles_class},num_classes_{num_classes},alpha_{alpha},beta_{beta}{}
   
   ~BetaParticleGenerator(){};
   
@@ -27,6 +27,8 @@ protected:
   using ParticleGenerator<Tdim>::vec_particles_ptr_;
 
 private:
+  unsigned num_particles_class_;
+  unsigned num_classes_;
   double alpha_;
   double beta_;
 };
