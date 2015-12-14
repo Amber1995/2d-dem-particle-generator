@@ -1,9 +1,13 @@
-//! this function is for reading particle generator information
-
 #include <fstream>
 #include <sstream>
 #include <string>
 #include <iostream>
+
+// Read particle generation information from inputfile
+// \param inputfile                                 Name of the inputfile
+// \param num_particles, min_radius, max_radius     General information
+// \param num_particle_class, num_classes           Parameters in Voivret paper
+// \alpha, beta                                     Parameters in beta function
 void read_generator(std::string& inputfile, unsigned& num_particles,double& min_radius, double& max_radius,unsigned& num_particles_class, unsigned& num_classes,double& alpha, double& beta){
   
   std::string line;
@@ -61,7 +65,7 @@ void read_generator(std::string& inputfile, unsigned& num_particles,double& min_
   }
   else std::cerr<<"Unable to open file";
 
-   //! make sure the max_radius is always larger than the min_radius
+   // to ensure max_radius is always larger than the min_radius
   if (min_radius > max_radius) std::swap(min_radius, max_radius);
   
 }

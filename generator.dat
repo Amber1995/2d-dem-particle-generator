@@ -10,15 +10,15 @@
 4.0
 
 *MIN_PARTICLE
-15
+10
 
 *NUM_CLASSES
 20
 
 *ALPHA 
-2.0
+3.0
 
 *BETA
-4.0
+1.0
 
 *END

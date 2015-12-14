@@ -17,7 +17,7 @@ BetaParticleGenerator(const unsigned& num_particles, const double& min_radius, c
   :ParticleGenerator<Tdim>(num_particles, min_radius,max_radius),num_particles_class_{num_particles_class},num_classes_{num_classes},alpha_{alpha},beta_{beta}{}
   
   ~BetaParticleGenerator(){};
-  
+  //! $\Gamma_x = x + y$  
   void generator();
   
 protected:

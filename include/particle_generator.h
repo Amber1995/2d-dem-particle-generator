@@ -6,7 +6,9 @@
 
 #include "particle.h"
 
-//! base class
+//! \brief Base class for generating particles
+//! \tparam Tdim - the dimension (2 or 3) of particles
+
 template <unsigned Tdim>
 class ParticleGenerator{
 
@@ -18,12 +20,17 @@ public:
   
   virtual void generator() = 0;
 
+  //! prints particles information
   void particles_info(std::string& outputfile);
   
 protected:
+  //! total number of particles
   unsigned num_particles_;
+  //! minimum radius of particles
   double min_radius_;
+  //! maximum radius of particles
   double max_radius_;
+  //! vector of shared particle pointers
   std::vector<std::shared_ptr<Particle<Tdim>>> vec_particles_ptr_;
 };
 

@@ -30,26 +30,30 @@ void BetaParticleGenerator<Tdim>::generator() {
     if (Tdim == 2) volume = Pi * mean_radius * mean_radius * 1.0;
     else if (Tdim == 3) volume = 4 * Pi * std::pow(mean_radius, 3) / 3;
     
-
-    unsigned temp_num_particles_class = std::ceil(cum_beta / volume);  //! the number of particles in the class for a unit of total volume
     
+    unsigned temp_num_particles_class = std::ceil(cum_beta / volume);  //! the number of particles in the class for a unit of total volume
+      
     vec_num_particles_class.push_back(temp_num_particles_class);  //! the vector of particle number
 
     if (min_num_particles_class > temp_num_particles_class) min_num_particles_class = temp_num_particles_class;
+    std::cout<<vec_num_particles_class.at(i)<<"   "<<std::endl;
   }
 
   //! vec_num_particles_class.at(i) is rescaled by a factor num_particles_class_ to make sure the number of particles in each class is more than a minumum value
   for (unsigned i = 0; i < num_classes_; ++i) {
-    vec_num_particles_class.at(i) = num_particles_class_ / min_num_particles_class * vec_num_particles_class.at(i);
-    total_particles += vec_num_particles_class.at(i);
+    if(vec_num_particles_class.at(i)<num_particles_class_){
+      vec_num_particles_class.at(i) = static_cast<int>(static_cast<double>(num_particles_class_) / static_cast<double>(min_num_particles_class)) * vec_num_particles_class.at(i);
+      total_particles += vec_num_particles_class.at(i);
+      std::cout<<vec_num_particles_class.at(i)<<"   "<<std::endl;
+    }
   }
-
+  std::cout<<"total_particles   "<<total_particles<<std::endl;
+  
   //! to ensure the number of generated particles is more than the minimum  number of particles "num_particles" required for the construction of the packing
   for (unsigned i = 0; i < num_classes_; ++i) {
-    if (total_particles < num_particles_) {
-      vec_num_particles_class.at(i) = static_cast<int>(
-          static_cast<double>(num_particles_ / total_particles) *
-          vec_num_particles_class.at(i));
+    if (total_particles < num_particles_){
+      vec_num_particles_class.at(i) = static_cast<int>(static_cast<double>(num_particles_) / static_cast<double>(total_particles)) * vec_num_particles_class.at(i);
+  
     }
   }
 
