@@ -20,6 +20,7 @@ BetaParticleGenerator(const unsigned& num_particles, const double& min_radius, c
   //! $\Gamma_x = x + y$  
   void generator();
   
+  
 protected:
   using ParticleGenerator<Tdim>::num_particles_;
   using ParticleGenerator<Tdim>::min_radius_;
@@ -31,6 +32,9 @@ private:
   unsigned num_classes_;
   double alpha_;
   double beta_;
+  double betai(const double& a, const double& b,const double& x);
+  double betacf(const double& a, const double& b,const double& x);
+  double gammln(const double& xx );
 };
 
 #include "beta_distribution_generator.tcc"

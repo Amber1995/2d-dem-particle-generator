@@ -53,9 +53,9 @@ int main(int argc, char** argv) {
   // std::shared_ptr<ParticleGenerator<Dim>> grain_generator = std::make_shared<RandomParticleGenerator<Dim>>(num_particles, min_radius,max_radius);
   
 //read_generator(inputfile,num_particles,min_radius,max_radius,alpha,beta);
-  std::shared_ptr<ParticleGenerator<Dim>> grain_generator = std::make_shared<AcceptRejectGenerator<Dim>>(num_particles,min_radius,max_radius,alpha,beta);
+  //std::shared_ptr<ParticleGenerator<Dim>> grain_generator = std::make_shared<AcceptRejectGenerator<Dim>>(num_particles,min_radius,max_radius,alpha,beta);
 
-  //std::shared_ptr<ParticleGenerator<Dim>> grain_generator = std::make_shared<BetaParticleGenerator<Dim>>(num_particles,min_radius,max_radius,num_particles_class,num_classes,alpha,beta);
+  std::shared_ptr<ParticleGenerator<Dim>> grain_generator = std::make_shared<BetaParticleGenerator<Dim>>(num_particles,min_radius,max_radius,num_particles_class,num_classes,alpha,beta);
   
    //! to generate all particles
    grain_generator->generator();
