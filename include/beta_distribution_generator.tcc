@@ -14,7 +14,7 @@ void BetaParticleGenerator<Tdim>::generator() {
 
   //! Temporary total number of particles calculated by minimum number of particles in all classes
   double temp_total_particles = std::numeric_limits<double>::min();
-  
+  double raison = std::numeric_limits<double>::min();
   //! Vector of lower limit in each interval
   std::vector<double> vec_division;
   vec_division.reserve(num_classes_+1);
@@ -31,30 +31,32 @@ void BetaParticleGenerator<Tdim>::generator() {
   std::vector<unsigned> vec_num_particles_class;
   vec_num_particles_class.reserve(num_classes_);
 
-  double a = alpha_-1;
-  double b = beta_-1;
+  double a = alpha_;
+  double b = beta_;
   double interval = max_radius_ - min_radius_;
   //! The first step is to discretize the interval
-  double raison = std::exp((std::log(max_radius_)-std::log(min_radius_))/static_cast<double>(num_classes_));
+  raison = std::exp((std::log(max_radius_)-std::log(min_radius_))/static_cast<double>(num_classes_));
+  
   //! Initialized the vec_division to the value of raison
-  for(unsigned i =0;i<num_classes_+1;++i){
-    vec_division.push_back(raison);
+   for(unsigned i = 0;i < num_classes_+1;++i){
+   vec_division.push_back(raison);
   }
   
   //! Calculates lower limit in each interval
   vec_division.at(0)=min_radius_;
-  for(unsigned i=1;i<num_classes_;++i){
-    vec_division.at(i) = vec_division.at(i-1)*raison;
+  for(unsigned i=0;i<num_classes_;++i){
+    vec_division.at(i+1) = vec_division.at(i)*raison;  
   }
   vec_division.at(num_classes_)=max_radius_;
-  
+
   //! Calculates volume of each class
   for (unsigned i=0;i<num_classes_;++i){
-   double volume_class = betai(a,b,(vec_division.at(i+1)-min_radius_)/interval) - betai(a,b,(vec_division.at(i)-min_radius_)/interval);
+    double volume_class = betai(a,b,(vec_division.at(i+1)-min_radius_)/interval)- betai(a,b,(vec_division.at(i)-min_radius_)/interval);
+    std::cout<<volume_class<<std::endl;
     vec_volume_class.push_back(volume_class);
   }
 
-  for(unsigned i=0;i<num_classes_;++i){
+    for(unsigned i=0;i<num_classes_;++i){
     //! Mean radius of each class
     double mean_radius = vec_division.at(i)/(0.5*(1+1.0/raison));
   //! Calculates the volume of each particle
@@ -66,9 +68,10 @@ void BetaParticleGenerator<Tdim>::generator() {
       min_num_particles_class =  vec_prob_class.at(i);  
     }
 
-  //! Temporary number of particles in each class
+     //! Temporary number of particles in each class
   for (unsigned i=0;i<num_classes_;++i){
-    vec_num_particles_class.at(i) = static_cast<unsigned>(std::floor((num_particles_class_)/min_num_particles_class* vec_prob_class.at(i)));
+    double num = static_cast<unsigned>(std::floor((num_particles_class_)/min_num_particles_class* vec_prob_class.at(i)));
+    vec_num_particles_class.push_back(num);
     temp_total_particles += vec_num_particles_class.at(i);
   }
 
@@ -88,35 +91,33 @@ void BetaParticleGenerator<Tdim>::generator() {
       ++id;
     }
   }
- 
 }
 
 //! Returns the incomplete beta function Ix(a,b)
 template <unsigned Tdim>
 double BetaParticleGenerator<Tdim>::betai(const double& a, const double& b,const double& x){
-  double betacf(const double& a, const double& b,const double& x);
-  double gamma(const double& xx);
+  
+  //double betacf(a,  b, x);
+  // double gammln(const double& xx);
   double bt;
+  
   if (x < 0.0 || x > 1.0) std::cout<<"Bad x in routine betai"<<std::endl;
   if (x == 0.0 || x == 1.0) bt = 0.0;
-  else bt = exp(gammln(a + b) - gammln(a) - gammln(b) + a * log(x) +
-             b * log(1.0 - x));
-
-  return bt;
+  else bt = std::exp(gammln(a + b)- gammln(a) - gammln(b) + a * std::log(x) + b * std::log(1.0 - x));
   if (x < (a + 1.0) / (a + b + 2.0)){
     bt = bt * betacf(a, b, x) / a;
-    return bt;
-  } 
+  }
   else{
     bt = 1.0 - bt * betacf(b, a, 1.0 - x) / b;
-    return bt;
-  } 
+  }
+  return bt;
 }
 
 //! Evaluates continued fraction for incomplete beta function by modified Lentz's method.
 //! \param a=alpha-1, b=beta-1, x=
 template <unsigned Tdim>
 double BetaParticleGenerator<Tdim>:: betacf(const double& a, const double& b,const double& x){
+ 
   //! These q's are factors use in the equations...
   double qab = a + b;
   double qap = a + 1.0;
@@ -124,7 +125,7 @@ double BetaParticleGenerator<Tdim>:: betacf(const double& a, const double& b,con
   //! First step of Lentz's method
   double c = 1.0;
   double d = 1.0 - qab*x/qap;
-  if (fabs(d) < 1.0e-30) d = 1.0e-30;
+  if (std::fabs(d) < 1.0e-30) d = 1.0e-30;
   d = 1.0 / d;
   double h = d;
   for (unsigned m=1;m<1000;m++){
@@ -132,19 +133,19 @@ double BetaParticleGenerator<Tdim>:: betacf(const double& a, const double& b,con
     double aa = m * (b - m) * x/((qam+m2)*(a+m2));
     //! One step (the even one) of the recurrence
     d = 1.0 + aa * d;
-    if (fabs(d) < 1.0e-30) d = 1.0e-30;
+    if (std::fabs(d) < 1.0e-30) d = 1.0e-30;
     d = 1.0 / d;
     h *= d * c;
     aa = -(a+m) * (qab + m) * x/((a+m2)*(qap+m2));
     //! Next step of the recurrence (the odd one)
     d = 1.0 + aa * d;
-    if (fabs(d) < 1.0e-30) d = 1.0e-30;
+    if (std::fabs(d) < 1.0e-30) d = 1.0e-30;
     c = 1.0 + aa/c;
-    if (fabs(d) < 1.0e-30) d = 1.0e-30;
+    if (std::fabs(d) < 1.0e-30) d = 1.0e-30;
     d = 1.0 / d;
     double del = d*c;
     h *= del;
-    if (fabs(del-1.0)<=1.0e-7) break;    // Are we done?
+    if (std::fabs(del-1.0)<=1.0e-7) break;    // Are we done?
   }
   return h;
 }
@@ -158,13 +159,13 @@ double BetaParticleGenerator<Tdim>::gammln(const double& xx){
 
   x = xx - 1.0;
   tmp = x + 5.5;
-  tmp -= (x + 0.5) * log(tmp);
+  tmp -= (x + 0.5) * std::log(tmp);
   ser = 1.0;
   for (unsigned j = 0; j <= 5; ++j) {
     x += 1.0;
     ser += cof[j] / x;
   }
-  return -tmp + log(2.50662827465 * ser);
+  return -tmp + std::log(2.50662827465 * ser);
 }
 
 
