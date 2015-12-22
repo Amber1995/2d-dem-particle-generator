@@ -5,16 +5,16 @@
 #include <fstream>
 #include <limits>
 
-// \brief Base class containder for DEM particles
-// \details Has constructors with information of a particle, i.e. id, radius and coordinates
-// \param TDIM - the dimension (2 or 3) of the DEM simulation
 
+//! \tparam TDIM - Dimension (2 or 3) of the DEM simulation
 template <unsigned Tdim>
+
+//! \brief Base class for DEM particle information
+//! \details A particle should have the information of particle id, radius and coordinates
 class Particle {
 
  public:
-
-  // Initializes the constructor 
+  //! Particle constructor with particle id, radius and coordinates
   Particle(const unsigned& id, const std::array<double, Tdim>& coordinates,
            const double& radius)
       : id_{id}, radius_{radius} {
@@ -22,32 +22,33 @@ class Particle {
     coordinates_ = coordinates;
   }
 
-  // used for the particle_generator loop
+  //! Particle constructor with particle id and radius
   Particle(const unsigned& id, const double& radius)
     :id_{id},radius_{radius} {coordinates_.fill(std::numeric_limits<double>::max());}
   
-  // Returns the value of id
+  //! Function used to return particle id
   unsigned id() const { return id_; }
 
-  // Parameterizes constructor
+  //! Function used to return particle coordinates
   std::array<double, Tdim> coordinates() const { return coordinates_; }
   void coordinates(const std::array<double, Tdim>& coordinates) {
     coordinates_ = coordinates;
   }
 
+  //! Function used to return particle radius
   double radius() const { return radius_; }
   void radius(const double& radius) { radius_ = radius; }
     
-  // the implementation of function info() is in the particle.tcc
+  //! Function to output the particle information to the file
   void info(std::ofstream& outfile);
 
  private:
-  // the basic information of a particle
-  // Particle ID
+  //! the basic information of a particle
+  //! Particle id
   unsigned id_;
-  // Particle Coordinates
+  //! Particle coordinates
   std::array<double, Tdim> coordinates_;
-  // Particle radius
+  //! Particle radius
   double radius_;
   
 };

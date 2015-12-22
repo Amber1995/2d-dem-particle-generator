@@ -84,7 +84,8 @@ void BetaParticleGenerator<Tdim>::generator() {
       vec_num_particles_class.at(i) = static_cast<unsigned>((static_cast<double>(num_particles_)/temp_total_particles)*vec_num_particles_class.at(i));
     }
   }
-  
+
+  // if(temp_total_particles < 4000){
   unsigned id = 0;
   for(unsigned i= 0;i<num_classes_;++i){
     double low_radius = min_radius_+(max_radius_-min_radius_)/num_classes_*i;
@@ -96,11 +97,7 @@ void BetaParticleGenerator<Tdim>::generator() {
       ++id;
     }
   }
-  
-  
-
-
-    
+  // }    
 }
 
 //! Returns the incomplete beta function Ix(a,b)

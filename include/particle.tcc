@@ -1,7 +1,7 @@
-// Prints particle information to .csv file
-// \param outfile is the name of the output file 
-
+//! \param outfile is the name of the output file
 template <unsigned Tdim>
+
+//! Function to print particle information to .csv file
 void Particle <Tdim>::info(std::ofstream& outfile) {
 
 //! outfile << "Particle ID,Radius,\n";

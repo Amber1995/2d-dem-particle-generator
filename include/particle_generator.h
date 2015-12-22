@@ -6,13 +6,14 @@
 
 #include "particle.h"
 
-//! \brief Base class for generating particles
 //! \tparam Tdim - the dimension (2 or 3) of particles
-
 template <unsigned Tdim>
+
+//! \brief Base class for generating particles
 class ParticleGenerator{
 
 public:
+  //! ParticleGenerator constructor with particle generation information, i.e. number of particles, minimum and maximum radius of genrated particles
   ParticleGenerator(const unsigned& num_particles,const double& min_radius, const double& max_radius)
   : num_particles_{num_particles},min_radius_{min_radius}, max_radius_{max_radius}{}
 
@@ -20,7 +21,7 @@ public:
   
   virtual void generator() = 0;
 
-  //! prints particles information
+  //! Function to print particles information
   void particles_info(std::string& outputfile);
   
 protected:
