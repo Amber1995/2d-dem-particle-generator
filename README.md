@@ -10,4 +10,4 @@
 
 2. make clean && make -jN (where N is the number of cores)
 
-3. Run lem `./dem_grain_gen`
+3. Run `./dem_grain_gen`

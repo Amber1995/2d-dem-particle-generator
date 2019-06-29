@@ -5,7 +5,7 @@ template <unsigned Tdim>
 void Particle <Tdim>::info(std::ofstream& outfile) {
 
 //! outfile << "Particle ID,Radius,\n";
-  outfile<<id_<<","<<radius_<<"\n";
+  outfile<<radius_<<"\n";
 
 // for(const auto& coordinate:coordinates_)
 //    std::cout<<coordinate<<"";

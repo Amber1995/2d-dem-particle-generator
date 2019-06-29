@@ -10,21 +10,25 @@
 template <unsigned Tdim>
 
 //! \brief Base class for generating particles
-class ParticleGenerator{
+class ParticleGenerator {
 
-public:
-  //! ParticleGenerator constructor with particle generation information, i.e. number of particles, minimum and maximum radius of genrated particles
-  ParticleGenerator(const unsigned& num_particles,const double& min_radius, const double& max_radius)
-  : num_particles_{num_particles},min_radius_{min_radius}, max_radius_{max_radius}{}
+ public:
+  //! ParticleGenerator constructor with particle generation information, i.e.
+  //! number of particles, minimum and maximum radius of genrated particles
+  ParticleGenerator(const unsigned& num_particles, const double& min_radius,
+                    const double& max_radius)
+      : num_particles_{num_particles},
+        min_radius_{min_radius},
+        max_radius_{max_radius} {}
 
-  virtual ~ParticleGenerator(){vec_particles_ptr_.clear();}
-  
+  virtual ~ParticleGenerator() { vec_particles_ptr_.clear(); }
+
   virtual void generator() = 0;
 
   //! Function to print particles information
   void particles_info(std::string& outputfile);
-  
-protected:
+
+ protected:
   //! total number of particles
   unsigned num_particles_;
   //! minimum radius of particles
@@ -36,4 +40,4 @@ protected:
 };
 
 #include "particle_generator.tcc"
-#endif  //DEM_PARTICLE_GENERATOR_H
+#endif  // DEM_PARTICLE_GENERATOR_H
